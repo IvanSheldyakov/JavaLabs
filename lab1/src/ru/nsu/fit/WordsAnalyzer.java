@@ -1,10 +1,8 @@
 package ru.nsu.fit;
 
 
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
-import java.io.FileReader;
-import java.io.BufferedReader;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -13,7 +11,7 @@ public class WordsAnalyzer {
     private Map<String,Integer> wordsAndItsCount = new HashMap<>();
     private int totalCount = 0;
 
-    public void readAndShowAnalyzedWordsInfo(String inputFile) throws IOException {
+    public void readAndShowAnalyzedWordsInfo(String inputFile, String outputFile) throws IOException {
         read(inputFile);
         List<Map.Entry<String,Integer>> list = new ArrayList<>(wordsAndItsCount.entrySet());
 
@@ -31,9 +29,38 @@ public class WordsAnalyzer {
             }
         });
 
+        PrintWriter writer = new PrintWriter(outputFile);
         for (Map.Entry<String,Integer> pair: list) {
-            System.out.printf("%s %d %.2f\n", pair.getKey(), pair.getValue(), (float)pair.getValue() / totalCount);
+            writer.printf("%s %d %.2f\n", pair.getKey(), pair.getValue(), (float)pair.getValue() / totalCount);
         }
+        writer.flush();
+        writer.close();
+    }
+
+    public void readAndShowAnalyzedWordsInfo(String inputFile, OutputStream out) throws IOException {
+        read(inputFile);
+        List<Map.Entry<String,Integer>> list = new ArrayList<>(wordsAndItsCount.entrySet());
+
+        list.sort(new Comparator<Map.Entry<String,Integer>>() {
+            @Override
+            public int compare(Map.Entry<String,Integer> first, Map.Entry<String,Integer> second) {
+                int dif = first.getValue() - second.getValue();
+                if (dif > 0) {
+                    return -1;
+                } else if (dif < 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+
+        PrintWriter writer = new PrintWriter(out);
+        for (Map.Entry<String,Integer> pair: list) {
+            writer.printf("%s %d %.2f\n", pair.getKey(), pair.getValue(), (float)pair.getValue() / totalCount);
+        }
+        writer.flush();
+        writer.close();
     }
 
     private void read(String inputFile) throws IOException {

@@ -10,7 +10,7 @@ public class Main {
         }
         WordsAnalyzer analyzer = new WordsAnalyzer();
         try {
-            analyzer.readAndShowAnalyzedWordsInfo(args[0]);
+            analyzer.readAndShowAnalyzedWordsInfo(args[0],System.out);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
