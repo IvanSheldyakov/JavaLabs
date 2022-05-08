@@ -1,0 +1,60 @@
+2022-03-16 11:55:00 INFO  Calculator:15 - calculator starts working
+2022-03-16 11:55:00 INFO  ProgramCalculatorParser:25 - parser starts working
+2022-03-16 11:55:00 INFO  ProgramCalculatorParser:41 - parser finishes work
+2022-03-16 11:55:00 INFO  CommandFabric:29 - properties was loaded
+2022-03-16 11:55:00 INFO  CommandFabric:37 - fabric was initialized
+2022-03-16 11:55:00 INFO  CommandFabric:45 - fabric tries to create DEFINE
+2022-03-16 11:55:00 INFO  CommandFabric:55 - fabric created DEFINE
+2022-03-16 11:55:00 INFO  Calculator:21 - DEFINE command starts working with context: Context{stack=[], constants={}} and with args: [DEFINE, a, -4.5]
+2022-03-16 11:55:00 INFO  DefineCommand:19 - DEFINE command finishes work
+2022-03-16 11:55:00 INFO  CommandFabric:45 - fabric tries to create PUSH
+2022-03-16 11:55:00 INFO  CommandFabric:55 - fabric created PUSH
+2022-03-16 11:55:00 INFO  Calculator:21 - PUSH command starts working with context: Context{stack=[], constants={a=-4.5}} and with args: [PUSH, 5]
+2022-03-16 11:55:00 INFO  PushCommand:25 - PUSH command finishes work with context: Context{stack=[5.0], constants={a=-4.5}}
+2022-03-16 11:55:00 INFO  CommandFabric:45 - fabric tries to create PUSH
+2022-03-16 11:55:00 INFO  CommandFabric:55 - fabric created PUSH
+2022-03-16 11:55:00 INFO  Calculator:21 - PUSH command starts working with context: Context{stack=[5.0], constants={a=-4.5}} and with args: [PUSH, 5]
+2022-03-16 11:55:00 INFO  PushCommand:25 - PUSH command finishes work with context: Context{stack=[5.0, 5.0], constants={a=-4.5}}
+2022-03-16 11:55:00 INFO  CommandFabric:45 - fabric tries to create PUSH
+2022-03-16 11:55:00 INFO  CommandFabric:55 - fabric created PUSH
+2022-03-16 11:55:00 INFO  Calculator:21 - PUSH command starts working with context: Context{stack=[5.0, 5.0], constants={a=-4.5}} and with args: [PUSH]
+2022-03-16 11:55:00 ERROR Calculator:27 - push command needs 1 arg
+ru.nsu.fit.calculator.exceptions.IncorrectAmountOfArgsException: push command needs 1 arg
+	at ru.nsu.fit.calculator.commands.PushCommand.validate(PushCommand.java:30)
+	at ru.nsu.fit.calculator.commands.PushCommand.execute(PushCommand.java:16)
+	at ru.nsu.fit.calculator.Calculator.execute(Calculator.java:24)
+	at ru.nsu.fit.calculator.Main.main(Main.java:8)
+2022-03-16 11:55:00 INFO  CommandFabric:45 - fabric tries to create PUSH
+2022-03-16 11:55:00 INFO  CommandFabric:55 - fabric created PUSH
+2022-03-16 11:55:00 INFO  Calculator:21 - PUSH command starts working with context: Context{stack=[5.0, 5.0], constants={a=-4.5}} and with args: [PUSH, 5]
+2022-03-16 11:55:00 INFO  PushCommand:25 - PUSH command finishes work with context: Context{stack=[5.0, 5.0, 5.0], constants={a=-4.5}}
+2022-03-16 11:55:00 INFO  CommandFabric:45 - fabric tries to create PUSH
+2022-03-16 11:55:00 INFO  CommandFabric:55 - fabric created PUSH
+2022-03-16 11:55:00 INFO  Calculator:21 - PUSH command starts working with context: Context{stack=[5.0, 5.0, 5.0], constants={a=-4.5}} and with args: [PUSH, 5]
+2022-03-16 11:55:00 INFO  PushCommand:25 - PUSH command finishes work with context: Context{stack=[5.0, 5.0, 5.0, 5.0], constants={a=-4.5}}
+2022-03-16 11:55:00 INFO  CommandFabric:45 - fabric tries to create POP
+2022-03-16 11:55:00 INFO  CommandFabric:55 - fabric created POP
+2022-03-16 11:55:00 INFO  Calculator:21 - POP command starts working with context: Context{stack=[5.0, 5.0, 5.0, 5.0], constants={a=-4.5}} and with args: [POP, 5]
+2022-03-16 11:55:00 INFO  PopCommand:20 - POP command finishes work with context: Context{stack=[5.0, 5.0, 5.0], constants={a=-4.5}}
+2022-03-16 11:55:00 INFO  CommandFabric:45 - fabric tries to create SAVE
+2022-03-16 11:55:00 INFO  CommandFabric:55 - fabric created SAVE
+2022-03-16 11:55:00 INFO  Calculator:21 - SAVE command starts working with context: Context{stack=[5.0, 5.0, 5.0], constants={a=-4.5}} and with args: [SAVE, b.txt]
+2022-03-16 11:55:00 INFO  SaveCommand:32 - SAVE command finishes work
+2022-03-16 11:55:00 INFO  CommandFabric:45 - fabric tries to create LOAD
+2022-03-16 11:55:00 INFO  CommandFabric:55 - fabric created LOAD
+2022-03-16 11:55:00 INFO  Calculator:21 - LOAD command starts working with context: Context{stack=[5.0, 5.0, 5.0], constants={a=-4.5}} and with args: [LOAD, b.txt]
+2022-03-16 11:55:00 INFO  LoadCommand:38 - LOAD command finishes work with such context: Context{stack=[5.0, 5.0, 5.0, 5.0, 5.0, 5.0], constants={a=-4.5}}
+2022-03-16 11:55:00 INFO  CommandFabric:45 - fabric tries to create AVG
+2022-03-16 11:55:00 INFO  CommandFabric:55 - fabric created AVG
+2022-03-16 11:55:00 INFO  Calculator:21 - AVG command starts working with context: Context{stack=[5.0, 5.0, 5.0, 5.0, 5.0, 5.0], constants={a=-4.5}} and with args: [AVG, 8]
+2022-03-16 11:55:00 ERROR Calculator:27 - size is too big
+ru.nsu.fit.calculator.exceptions.IncorrectSizeException: size is too big
+	at ru.nsu.fit.calculator.Context.getElements(Context.java:50)
+	at ru.nsu.fit.calculator.commands.AverageCommand.execute(AverageCommand.java:21)
+	at ru.nsu.fit.calculator.Calculator.execute(Calculator.java:24)
+	at ru.nsu.fit.calculator.Main.main(Main.java:8)
+2022-03-16 11:55:00 INFO  CommandFabric:45 - fabric tries to create PRINT
+2022-03-16 11:55:00 INFO  CommandFabric:55 - fabric created PRINT
+2022-03-16 11:55:00 INFO  Calculator:21 - PRINT command starts working with context: Context{stack=[5.0, 5.0, 5.0, 5.0, 5.0, 5.0], constants={a=-4.5}} and with args: [PRINT]
+2022-03-16 11:55:00 INFO  PrintCommand:18 - PRINT command finishes work
+2022-03-16 11:55:00 INFO  Calculator:33 - calculator finishes work
