@@ -35,13 +35,9 @@ public class GoodsStorage {
         return goodName;
     }
 
-    public synchronized Good takeGood() {
+    public synchronized Good takeGood() throws InterruptedException {
         while(goods.size() < 1) {
-            try {
-                wait();
-            } catch(InterruptedException e) {
-                e.printStackTrace();
-            }
+            wait();
         }
         Good good = goods.poll();
         notifyAll();
@@ -49,13 +45,9 @@ public class GoodsStorage {
         return good;
     }
 
-    public synchronized void addGood(Good good) {
+    public synchronized void addGood(Good good) throws InterruptedException {
         while(goods.size() >= capacity) {
-            try {
-                wait();
-            } catch(InterruptedException e) {
-                e.printStackTrace();
-            }
+            wait();
         }
         goods.add(good);
         logger.info("add good " + good.getId() + " to storage");

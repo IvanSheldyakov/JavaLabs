@@ -19,7 +19,7 @@ public class DestinationStation extends Station {
     }
 
 
-    public void serviceTrain(Train train) {
+    public void serviceTrain(Train train) throws InterruptedException {
         Path path = pathsForService.takePath();
         logger.info("get unload path");
         for (GoodsStorage goodsStorage : storages) {
@@ -27,12 +27,7 @@ public class DestinationStation extends Station {
             long capacity = train.getCapacityByGood(goodsStorage.getGoodName());
             while (currentSize != capacity) {
                 goodsStorage.addGood(train.takeGood(goodsStorage.getGoodName()));
-                try {
-                    Thread.sleep(goodsStorage.getGoodUnloadTime());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    break;
-                }
+                Thread.sleep(goodsStorage.getGoodUnloadTime());
                 currentSize++;
             }
         }

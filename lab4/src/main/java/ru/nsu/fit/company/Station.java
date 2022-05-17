@@ -15,7 +15,7 @@ public abstract class Station {
     protected PathsManager pathsForTransfer;
 
     public abstract long getDistanceBetweenStations();
-    public abstract void serviceTrain(Train train);
+    public abstract void serviceTrain(Train train) throws InterruptedException;
     public abstract Path getPathForTransfer();
     public abstract void returnPathForTransfer(Path path);
 

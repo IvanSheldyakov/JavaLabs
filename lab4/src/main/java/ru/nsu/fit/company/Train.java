@@ -28,47 +28,44 @@ public class Train extends Thread implements Observable {
     @Override
     public void run() {
         while (!needToUtilize()) {
+            try {
+                departureStation.serviceTrain(this);
+                logger.info("filled train " + getId());
 
+                transferToDestinationStation();
 
-            departureStation.serviceTrain(this);
-            logger.info("filled train " + getId());
+                destinationStation.serviceTrain(this);
+                logger.info("unloaded train " + getId());
 
-            transferToDestinationStation();
-
-            destinationStation.serviceTrain(this);
-            logger.info("unloaded train " + getId());
-
-            transferToDepartureStation();
+                transferToDepartureStation();
+            } catch (InterruptedException e) {
+                interrupt();
+                return;
+            }
         }
         logger.info("train " + getId() + " need to replace");
         notifyAllObservers();
     }
 
-    private void transferToDestinationStation() {
+    private void transferToDestinationStation() throws InterruptedException {
         Path pathForTransfer = departureStation.getPathForTransfer();
         logger.info(getId() + " got path for transfer");
-        try {
-            long transferTime = departureStation.getDistanceBetweenStations()/speed;
-            Thread.sleep(transferTime);
-            logger.info("train " + getId() + " arrived to destination station");
-            timeOfAmortization -= transferTime;
-        } catch(InterruptedException e) {
-            e.printStackTrace();
-        }
+        long transferTime = departureStation.getDistanceBetweenStations()/speed;
+        Thread.sleep(transferTime);
+        logger.info("train " + getId() + " arrived to destination station");
+        timeOfAmortization -= transferTime;
         departureStation.returnPathForTransfer(pathForTransfer);
     }
 
-    private void transferToDepartureStation(){
+    private void transferToDepartureStation() throws InterruptedException {
         Path pathForTransfer = destinationStation.getPathForTransfer();
         logger.info(getId() + " get path for back transfer");
-        try {
-            long transferTime = destinationStation.getDistanceBetweenStations()/speed;
-            Thread.sleep(transferTime);
-            logger.info(getId() + " train arrived to departure station");
-            timeOfAmortization -= transferTime;
-        } catch(InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        long transferTime = destinationStation.getDistanceBetweenStations()/speed;
+        Thread.sleep(transferTime);
+        logger.info(getId() + " train arrived to departure station");
+        timeOfAmortization -= transferTime;
+
         destinationStation.returnPathForTransfer(pathForTransfer);
     }
 

@@ -26,10 +26,8 @@ public class GoodsFactory extends Thread {
                 logger.info("Factory "  + getId() + " created good " + good.getId());
                 storage.addGood(good);
 
-
             } catch (InterruptedException e) {
-                e.printStackTrace();
-                break;
+                interrupt();
             }
         }
     }

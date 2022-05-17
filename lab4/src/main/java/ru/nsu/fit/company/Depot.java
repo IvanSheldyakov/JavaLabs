@@ -25,6 +25,13 @@ public class Depot implements Observer {
         createAndStartNewTrain();
     }
 
+
+    public void terminate() {
+        for (var train : trains) {
+            train.interrupt();
+        }
+    }
+
     public void launchTrains() {
         for (var train : trains) {
             train.start();
@@ -60,7 +67,7 @@ public class Depot implements Observer {
 
 
 
-    private void createAndStartNewTrain() {
+    private synchronized void  createAndStartNewTrain() {
         for (int i = 0; i < trains.size(); i++) {
             Train train = trains.get(i);
             if (!train.isAlive()) {

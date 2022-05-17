@@ -24,8 +24,7 @@ public class Consumer extends Thread {
                 logger.info("Consumer " + getId() + " consumed " + good.getId());
 
             } catch (InterruptedException e) {
-                e.printStackTrace();
-                break;
+                interrupt();
             }
         }
     }

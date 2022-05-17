@@ -16,7 +16,8 @@ public class TrainCreator extends Thread {
         try {
             sleep(timeToCreate);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            interrupt();
+            return;
         }
         ready = true;
     }
